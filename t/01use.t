@@ -3,7 +3,7 @@ use warnings;
 use strict;
 
 use lib 'lib';
-use Test::More tests => 3;
+use Test::More tests => 2;
 
 # The versions of the following packages are reported to help understanding
 # the environment in which the tests are run.  This is certainly not a
@@ -12,7 +12,6 @@ my @show_versions =
  qw/Test::More
     XML::Compile
     XML::Compile::Cache
-    XML::Compile::SOAP
     XML::Compile::C14N
    /;
 
@@ -28,6 +27,5 @@ foreach my $package (@show_versions)
     warn "$package $report\n";
 }
 
-require_ok('XML::Compile::WSS::Util');
-require_ok('XML::Compile::WSS');
-require_ok('XML::Compile::SOAP::WSS');
+require_ok('XML::Compile::C14N');
+require_ok('XML::Compile::C14N::Util');

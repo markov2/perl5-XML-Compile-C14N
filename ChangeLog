@@ -1,5 +1,15 @@
+==== version history of XML::Compile::C14N
 
-==== version history of XML::Compile:WSS
+version 0.90: Mon Nov  5 14:33:57 CET 2012
 
-version 0.10: Tue Apr 26 23:46:11 CEST 2011
-	- initial release
+	Improvements:
+
+	- add t/01use.t
+
+	- add information about C14N version 2.0
+
+	- add normalize()
+
+version 0.10: Tue Apr 26 23:40:56 CEST 2011
+
+	- initial version

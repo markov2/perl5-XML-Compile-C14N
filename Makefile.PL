@@ -3,17 +3,15 @@ use ExtUtils::MakeMaker;
 use 5.008;
 
 WriteMakefile
- ( NAME	 	=> 'XML::Compile::WSA'
- , VERSION	=> '0.10'
+ ( NAME	 	=> 'XML::Compile::C14N'
+ , VERSION	=> '0.90'
 
  , PREREQ_PM    =>
      { XML::Compile         => '1.21'
      , XML::Compile::Cache  => '0.98'
-     , XML::Compile::C14N   => '0.10'
      , Log::Report          => '0.92'
 
      , Test::More           => 0.54
-     , File::Basename       => 0
      }
  , EXE_FILES    => []
  , AUTHOR       => 'Mark Overmeer'
