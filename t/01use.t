@@ -13,6 +13,7 @@ my @show_versions =
     XML::Compile
     XML::Compile::Cache
     XML::Compile::C14N
+    XML::LibXML
    /;
 
 foreach my $package (@show_versions)

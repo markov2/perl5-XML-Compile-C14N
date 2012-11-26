@@ -11,7 +11,7 @@ use XML::Compile::Tester     qw/compare_xml/;
 use XML::Compile::C14N       ();
 use XML::Compile::C14N::Util ':c14n';
 
-use Encode                   qw/encode decode/;
+#use Encode                   qw/encode decode/;
 
 my $cache = XML::Compile::Cache->new;
 my $c14n  = XML::Compile::C14N->new(schema => $cache);
@@ -72,7 +72,8 @@ my $in2 = to_xml <<'_INPUT_DOCUMENT';
 _INPUT_DOCUMENT
 
 my $out2 = $c14n->normalize(C14N_v11_COMMENTS, $in2);
-is($out2, encode utf8 => $in2->documentElement);
+#is($out2, encode utf8 => $in2->documentElement);
+is($out2, $in2->documentElement->toString);
 
 ### Example 3.3
 

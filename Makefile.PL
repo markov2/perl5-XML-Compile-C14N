@@ -4,14 +4,15 @@ use 5.008;
 
 WriteMakefile
  ( NAME	 	=> 'XML::Compile::C14N'
- , VERSION	=> '0.90'
+ , VERSION	=> '0.91'
 
  , PREREQ_PM    =>
-     { XML::Compile         => '1.21'
+     { XML::Compile         => '1.30'
      , XML::Compile::Cache  => '0.98'
-     , Log::Report          => '0.92'
+     , XML::LibXML          => '1.94'
 
-     , Test::More           => 0.54
+     , Log::Report          => '0.991'
+     , Test::More           => '0.98'
      }
  , EXE_FILES    => []
  , AUTHOR       => 'Mark Overmeer'
