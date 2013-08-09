@@ -221,6 +221,9 @@ my $context7 = XML::LibXML::XPathContext->new;
 $context7->registerNs(ietf => 'http://www.ietf.org');
 
 TODO: {
+   diag "**** I know of this error, but do not know how to fix it!";
+   diag "**** it is an example taken from the c14n spec.  Can you help?";
+
    local $TODO = 'No idea how this should work';
    my $out7 = eval { $c14n->normalize(C14N_v11_NO_COMM, $in7, xpath => $xpath7,
       context => $context7) };

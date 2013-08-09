@@ -14,9 +14,15 @@ my @c14n = qw/
   C14N_EXC_NS
  /;
 
+my @paths = qw/
+  C14N10
+  C14N11
+  C14NEXC  
+ /;
+
 our @EXPORT      = qw/C14N_EXC_NS/;
-our @EXPORT_OK   = (@c14n);
-our %EXPORT_TAGS = (c14n => \@c14n);
+our @EXPORT_OK   = (@c14n, @paths);
+our %EXPORT_TAGS = (c14n => \@c14n, paths => \@paths);
 
 =chapter NAME
 XML::Compile::C14N::Util - constants for XML::Compile::C14N
@@ -33,7 +39,7 @@ to XML Canonicalization.
 =section Constants
 =cut
 
-# Path components, not exported
+# Path components
 use constant
   { C14N10   => 'http://www.w3.org/TR/2001/REC-xml-c14n-20010315'
   , C14N11   => 'http://www.w3.org/2006/12/xml-c14n11'

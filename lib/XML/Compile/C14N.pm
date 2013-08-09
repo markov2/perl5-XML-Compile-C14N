@@ -5,15 +5,18 @@ package XML::Compile::C14N;
 
 use Log::Report 'xml-compile-c14n';
 
-use XML::Compile::C14N::Util ':c14n';
-use XML::LibXML;
+use XML::Compile::C14N::Util qw/:c14n :paths/;
+use XML::LibXML  ();
+use Scalar::Util qw/weaken/;
 
 my %versions =
  ( '1.0' => {}
  , '1.1' => {}
  );
 
-my @prefixes = (c14n => C14N_EXC_NS);
+my %prefixes =
+  ( c14n => C14N_EXC_NS
+  );
 
 my %features =       #comment  excl
   ( &C14N_v10_NO_COMM  => [ 0, 0 ]
@@ -45,11 +48,18 @@ L<XML::LibXML> yet, so also not provided by this module.
 =section Constructors
 
 =c_method new OPTIONS
+There can be more than one C14N object active in your program.
 
 =option  version STRING
 =default version '1.1'
 Explicitly state which version C14N needs to be used.  C14N2 is not
-yet supported.
+yet supported.  If not specified, it is first attempted to derive the
+version from the 'for' option.
+
+=option  for   METHOD
+=default for   C<undef>
+[0.92] When a canonicallization METHOD is provided, that will be used to
+automatically detect the C14N version to be loaded.
 
 =option  schema M<XML::Compile::Cache> object
 =default schema C<undef>
@@ -61,7 +71,14 @@ sub new(@) { my $class = shift; (bless {}, $class)->init( {@_} ) }
 sub init($)
 {   my ($self, $args) = @_;
 
-    my $version = $args->{version} || '1.1';
+    my $version = $args->{version};
+    if(my $c = $args->{for})
+    {   $version ||= index($c, C14N10 )==0 ? '1.0'
+                   : index($c, C14N11 )==0 ? '1.1'
+                   : index($c, C14NEXC)==0 ? '1.1'
+                   : undef;
+    }
+    $version ||= '1.1';
     trace "initializing v14n $version";
 
     $versions{$version}
@@ -151,14 +168,14 @@ sub loadSchemas($)
     $schema->isa('XML::Compile::Cache')
         or error __x"loadSchemas() requires a XML::Compile::Cache object";
     $self->{XCC_schema} = $schema;
+    weaken $self->{XCC_schema};
 
     my $version = $self->version;
     my $def     = $versions{$version};
 
-    $schema->prefixes(@prefixes);
-    {   local $" = ',';
-        $schema->addKeyRewrite("PREFIXED(@prefixes)");
-    }
+    $schema->addPrefixes(\%prefixes);
+    my $rewrite = join ',', keys %prefixes;
+    $schema->addKeyRewrite("PREFIXED($rewrite)");
 
     (my $xsd = __FILE__) =~ s! \.pm$ !/exc-c14n.xsd!x;
     trace "loading c14n for $version";
