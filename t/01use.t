@@ -12,8 +12,8 @@ my @show_versions =
  qw/Test::More
     XML::Compile
     XML::Compile::Cache
-    XML::Compile::C14N
     XML::LibXML
+    Log::Report
    /;
 
 foreach my $package (@show_versions)

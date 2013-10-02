@@ -18,11 +18,16 @@ my @paths = qw/
   C14N10
   C14N11
   C14NEXC  
+  is_canon_constant
  /;
 
 our @EXPORT      = qw/C14N_EXC_NS/;
 our @EXPORT_OK   = (@c14n, @paths);
-our %EXPORT_TAGS = (c14n => \@c14n, paths => \@paths);
+
+our %EXPORT_TAGS =
+  ( c14n  => \@c14n
+  , paths => \@paths
+  );
 
 =chapter NAME
 XML::Compile::C14N::Util - constants for XML::Compile::C14N
@@ -50,6 +55,10 @@ use constant
 
 Export tag C<:c14n> provides
 
+  C14N_v10_NO_COMM   C14N_v11_NO_COMM   C14N_EXC_NO_COMM
+  C14N_v10_COMMENTS  C14N_v11_COMMENTS  C14N_EXC_COMMENTS
+                                        C14N_EXC_NS
+
 =cut
 
 use constant
@@ -61,5 +70,15 @@ use constant
   , C14N_EXC_COMMENTS => C14NEXC.'#WithComments'
   , C14N_EXC_NS       => C14NEXC.'#'
   };
+
+=section Functions
+
+=function is_canon_constant CONSTANT
+[0.93] Returns C<true> if the CONSTANT is one of the constants defined by
+the C<:c14n> export tag.
+=cut
+
+my $is_canon =  qr/^(?:\Q${\C14N10}\E|\Q${\C14N11}\E|\Q${\C14NEXC}\E)\b/;
+sub is_canon_constant($) { $_[0] =~ $is_canon }
 
 1;

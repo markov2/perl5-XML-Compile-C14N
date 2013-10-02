@@ -1,5 +1,9 @@
 ==== version history of XML::Compile::C14N
 
+version 0.93: Wed Oct  2 10:48:48 CEST 2013
+	Improvements:
+	- added ::Util::is_canon_constant(), tests in t/20util.t
+
 version 0.92: Sat Aug 10 00:18:13 CEST 2013
 
 	Fixes:
