@@ -1,6 +1,18 @@
 ==== version history of XML::Compile::C14N
 
+version 0.94: Tue Feb 18 11:10:19 CET 2014
+
+	Fixes:
+	- Digest::SHA >5.74 downgrades utf8 strings, which mutulizes the
+	  output of toStringC14N.  Until XML::LibXML has a toBytesC14N,
+	  we switch-off the utf8 flag by force.  Bug found by [Achim Adam]
+
+	Improvements:
+	- show libxml2 version during test
+	- change documentation style
+
 version 0.93: Wed Oct  2 10:48:48 CEST 2013
+
 	Improvements:
 	- added ::Util::is_canon_constant(), tests in t/20util.t
 

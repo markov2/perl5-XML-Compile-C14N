@@ -73,8 +73,8 @@ use constant
 
 =section Functions
 
-=function is_canon_constant CONSTANT
-[0.93] Returns C<true> if the CONSTANT is one of the constants defined by
+=function is_canon_constant $constant
+[0.93] Returns C<true> if the $constant is one of the constants defined by
 the C<:c14n> export tag.
 =cut
 

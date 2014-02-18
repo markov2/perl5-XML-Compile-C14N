@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use warnings;
 use strict;
 
@@ -27,6 +27,9 @@ foreach my $package (@show_versions)
 
     warn "$package $report\n";
 }
+
+my $xml2_version = XML::LibXML::LIBXML_DOTTED_VERSION();
+warn "libxml2 $xml2_version\n";
 
 require_ok('XML::Compile::C14N');
 require_ok('XML::Compile::C14N::Util');

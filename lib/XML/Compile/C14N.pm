@@ -8,6 +8,7 @@ use Log::Report 'xml-compile-c14n';
 use XML::Compile::C14N::Util qw/:c14n :paths/;
 use XML::LibXML  ();
 use Scalar::Util qw/weaken/;
+use Encode       qw/_utf8_off/;
 
 my %versions =
  ( '1.0' => {}
@@ -47,7 +48,7 @@ L<XML::LibXML> yet, so also not provided by this module.
 
 =section Constructors
 
-=c_method new OPTIONS
+=c_method new %options
 There can be more than one C14N object active in your program.
 
 =option  version STRING
@@ -107,10 +108,9 @@ sub schema()  {shift->{XCC_schema}}
 #-----------
 =section Handling
 
-=method normalize TYPE, NODE, OPTIONS
-The TYPE is one of the C14* constants defined in
-M<XML::Compile::C14N::Util>.  The NODE is an M<XML::LibXML::Element>.
-Returned is a normalized byte-sequence, for instance to be signed.
+=method normalize $type, $node, %options
+The $type is one of the C14* constants defined in M<XML::Compile::C14N::Util>.  The $node is an M<XML::LibXML::Element>.  Returned is a normalized
+byte-sequence, for instance to be signed.
 
 =option  prefix_list ARRAY
 =default prefix_list []
@@ -141,6 +141,7 @@ sub normalize($$%)
     my $canon     =
       eval { $node->$serialize($with_comments, $xpath, $context, $prefixes) };
 #warn "--> $canon#\n";
+    _utf8_off $canon;
 
     if(my $err = $@)
     { #  $err =~ s/ at .*//s;
@@ -152,12 +153,12 @@ sub normalize($$%)
 #-----------
 =section Internals
 
-=method loadSchemas SCHEMA
-Load the C14N schema to the global SCHEMA, which must extend
+=method loadSchemas $schema
+Load the C14N schema to the global $schema, which must extend
 M<XML::Compile::Cache>.
 
 This method will be called when you provide a value for M<new(schema)>.
-Otherwise, you need to call this when the global SCHEMA is known in your
+Otherwise, you need to call this when the global $schema is known in your
 program.
 =cut
 

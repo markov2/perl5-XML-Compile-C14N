@@ -11,7 +11,7 @@ use XML::Compile::Tester     qw/compare_xml/;
 use XML::Compile::C14N       ();
 use XML::Compile::C14N::Util ':c14n';
 
-#use Encode                   qw/encode decode/;
+use Encode                   qw/_utf8_off/;
 
 my $cache = XML::Compile::Cache->new;
 my $c14n  = XML::Compile::C14N->new(schema => $cache);
@@ -187,9 +187,9 @@ my $in6 = to_xml <<'_INPUT_DOCUMENT';
 _INPUT_DOCUMENT
 
 my $out6 = $c14n->normalize(C14N_v11_NO_COMM, $in6);
-is($out6."\n", <<'_CANON');
-<doc>©</doc>
-_CANON
+my $exp6 = '<doc>©</doc>';
+_utf8_off($exp6);
+is($out6, $exp6);
 
 
 ### Example 3.7
@@ -227,6 +227,7 @@ TODO: {
    local $TODO = 'No idea how this should work';
    my $out7 = eval { $c14n->normalize(C14N_v11_NO_COMM, $in7, xpath => $xpath7,
       context => $context7) };
+   diag $@;
 
    no warnings;
    is($out7."\n", <<'_CANON');
