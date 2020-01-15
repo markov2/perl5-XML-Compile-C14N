@@ -1,6 +1,8 @@
 ==== version history of XML::Compile::C14N
 
-version 0.95:
+version 0.96:
+
+version 0.95: Wed 15 Jan 11:21:06 CET 2020
 
 	Fixes:
 	- disable 'strip' test, because I cannot get it to work in a test-
