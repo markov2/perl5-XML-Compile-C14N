@@ -2,6 +2,10 @@
 
 version 0.95:
 
+	Fixes:
+	- disable 'strip' test, because I cannot get it to work in a test-
+	  setup. rt.cpan.org#131477 [Slaven Rezic]
+
 	Improvements:
 	- convert to GitHub
 
