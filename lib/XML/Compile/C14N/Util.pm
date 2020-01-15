@@ -1,8 +1,12 @@
-use warnings;
-use strict;
+# This code is part of distribution XML-Compile-C14N.  Meta-POD processed
+# with OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package XML::Compile::C14N::Util;
 use base 'Exporter';
+
+use warnings;
+use strict;
 
 my @c14n = qw/
   C14N_v10_NO_COMM
@@ -32,7 +36,7 @@ our %EXPORT_TAGS =
 =chapter NAME
 XML::Compile::C14N::Util - constants for XML::Compile::C14N
 
-=chapter SYNOPSYS
+=chapter SYNOPSIS
  use XML::Compile::C14N::Util ':c14n';
 
 =chapter DESCRIPTION

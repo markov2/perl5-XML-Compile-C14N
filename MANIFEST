@@ -1,6 +1,7 @@
 ChangeLog
 MANIFEST
 Makefile.PL
+README.md
 lib/XML/Compile/C14N.pm
 lib/XML/Compile/C14N/Util.pm
 lib/XML/Compile/C14N/exc-c14n.xsd
